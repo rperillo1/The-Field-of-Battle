@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Field of Battle</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script defer src="js/main.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"></link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js"></script>
+</head>
+<body>
+
+    <section class="gameContents gameBack4">
+        <div>
+            <div id="icon-set1">
+                <!-- <a id="town" href=""><i class="fas fa-home icons text-dark"></i>Town</a> -->
+            </div>
+            <div id="icon-set2">
+                <a id="forest" href=""><i class="fas fa-tree icons text-warning"></i>Forest</a>
+            </div>
+            <div id="icon-set3">
+                <a id="fight" href=""><i class="fas fa-mountain icons text-danger"></i>Fight</a>
+            </div>
+        </div>
+
+        <aside class="creatureStats2">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                  <div class="col-md-6">
+                    <img src="imgs/wolf1.png" class="card-img wolf-img" alt="...">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <h5 class="card-title">Rabid Wolf</h5>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Health: </li>
+                        <li class="list-group-item">Strength: </li>
+                        <li class="list-group-item">Agility: </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card combat-card" style="width: 18rem;">
+                <div class="card-header">
+                  <strong>Combat Moves:</strong>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><button class="btn btn-block btn-danger combat-button">Swing</button></li>
+                    <li class="list-group-item"><button class="btn btn-block btn-warning combat-button">Dodge</button></li>
+                    <li class="list-group-item"><button class="btn btn-block btn-success combat-button">Run</button></li>
+                    <li class="list-group-item"><button class="btn btn-block btn-primary combat-button">Potions</button></li>
+                </ul>
+              </div>
+        </aside>
+    </section>
+
+    <aside class="charStats">
+        <div class="card">
+            <img src="imgs/character.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Character Stats</h5>
+              <p class="card-text">Some info about your characters stats below and abilities. Don't let your health get to zero, or you will die!</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Health: </li>
+              <li class="list-group-item">Strength: </li>
+              <li class="list-group-item">Agility: </li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Inventory</a>
+            </div>
+          </div>
+    </aside>
+
+</body>
+</html>
