@@ -6,9 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Field of Battle</title>
     <link rel="stylesheet" href="css/main.css">
-    <script defer src="js/main.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"></link>
+    <link href="https://fonts.googleapis.com/css?family=Quantico:400,400i,700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+ 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script defer src="js/main.js"></script>
 </head>
 <body>
 
@@ -30,13 +33,13 @@
         <div class="card">
             <img src="imgs/character.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Character Stats</h5>
+              <h5 id="char-name" class="card-title"></h5>
               <p class="card-text">Some info about your characters stats below and abilities. Don't let your health get to zero, or you will die!</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Health: </li>
-              <li class="list-group-item">Strength: </li>
-              <li class="list-group-item">Agility: </li>
+              <li class="list-group-item">Health: <div id="char-health"></div></li>
+              <li class="list-group-item">Strength: <div id="char-strength"></div></li>
+              <li class="list-group-item">Agility: <div id="char-agility"></div></li>
             </ul>
             <div class="card-body">
               <a href="#" class="card-link">Inventory</a>
