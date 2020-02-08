@@ -77,7 +77,10 @@ let potions = document.querySelector('#potions')
 
 
 /*----- event listeners -----*/
-charSubmit.addEventListener('click', CreateChar)
+if (charSubmit) {
+    charSubmit.addEventListener('click', CreateChar)
+};
+
 
 
 /*----- functions -----*/
@@ -85,9 +88,12 @@ charSubmit.addEventListener('click', CreateChar)
 
 function CreateChar(e){
     if (document.querySelector('input[name="choice"]:checked')) {
-        charName.textContent = document.querySelector('#char-input').value
+        characterInfo = document.querySelector('#char-input').value
+        charName.textContent = characterInfo
+        
+        localStorage.setItem('charName', characterInfo)
+
         charSubmit.disabled = true;
-        localStorage.setItem('charName', charName.textContent)
         setTimeout(function(){
             $('.create-char').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
         },700);
@@ -97,6 +103,7 @@ function CreateChar(e){
     }
 }
 
+document.querySelector('#char-name').textContent = localStorage.getItem('charName')
 
 
 function init(){
@@ -104,3 +111,4 @@ function init(){
 }
 
 init()
+
