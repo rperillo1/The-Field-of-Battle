@@ -169,4 +169,11 @@ body {
     height: 15%;
 }
 
+.charStats li.list-group-item {
+    display: flex;
+}
+/* #char-health, #char-strength, #char-agility {
+    display: flex;
+} */
+
 
