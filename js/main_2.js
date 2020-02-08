@@ -28,6 +28,10 @@ let forestButton = document.querySelector('#forest')
 
 
 /*----- functions -----*/
+let jsonCharacterObj = localStorage.getItem("characterObj");
+let retrievedCharacterObj = JSON.parse(jsonCharacterObj);
+console.log(retrievedCharacterObj)
+
 function updateCharacterCard(){
     document.querySelector('#char-name').textContent = localStorage.getItem('charName')
 }

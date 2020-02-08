@@ -95,7 +95,7 @@ function CreateChar(e){
         charName.textContent = characterInfo
         //creating local storage variables 
         localStorage.setItem('charName', characterInfo)
-
+        localStorage.setItem('storeCharacterObj', JSON.stringify(characterObj));
     
         //disabling create character button
         charSubmit.disabled = true;
@@ -130,13 +130,11 @@ function generateHealth(){
 function generateStr(){
     let min = 20, max = 50
     characterState.Strength = Math.floor(Math.random() * (max - min + 1) + min)
-    console.log(characterState.Strength)
 }
 
 function generateAgi(){
     let min = 20, max = 50
     characterState.Agility = Math.floor(Math.random() * (max - min + 1) + min)
-    console.log(characterState.Agility)
 }
 
 function addModifier(){
@@ -151,6 +149,9 @@ function addModifier(){
 function renderStats(){
     generateStats()
     addModifier()
+    characterObj.stats.Health = characterState.Health
+    characterObj.stats.Strength = characterState.Strength
+    characterObj.stats.Agility = characterState.Agility
     charHealth.textContent = characterState.Health
     charStrength.textContent = characterState.Strength
     charAgility.textContent = characterState.Agility
