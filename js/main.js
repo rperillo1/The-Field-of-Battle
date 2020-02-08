@@ -87,7 +87,6 @@ charSubmit.addEventListener('click', CreateChar)
 
 
 /*----- functions -----*/
-
 function CreateChar(e){
     if (document.querySelector('input[name="choice"]:checked')) {
         renderStats()
@@ -95,13 +94,15 @@ function CreateChar(e){
         charName.textContent = characterInfo
         //creating local storage variables 
         localStorage.setItem('charName', characterInfo)
-        localStorage.setItem('storeCharacterObj', JSON.stringify(characterObj));
+        localStorage.setItem(CHARACTER_OBJ_KEY, JSON.stringify(characterObj));
     
         //disabling create character button
         charSubmit.disabled = true;
+        //fading out character creation form 
         setTimeout(function(){
             $('.create-char').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
         },700);
+        //fading in adventure button
         setTimeout(function(){
             $('#adventure').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
         },600);

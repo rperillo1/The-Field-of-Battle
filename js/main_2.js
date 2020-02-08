@@ -2,15 +2,12 @@
 // const beepAudio = new Audio('http://soundbible.com/mp3/Robot_blip-Marianne_Gagnon-120342607.mp3');
 
 
-/*----- app's state (variables) -----*/
-
-
-
 /*----- cached element references -----*/
-
+let characterObj = JSON.parse(localStorage.getItem(CHARACTER_OBJ_KEY));
+let charName = localStorage.getItem('charName');
 
 //character creation form & character aside
-let charName = document.querySelector('#char-name')
+let charNameArea = document.querySelector('#char-name')
 let charHealth = document.querySelector('#char-health')
 let charStrength = document.querySelector('#char-strength')
 let charAgility = document.querySelector('#char-agility')
@@ -28,12 +25,11 @@ let forestButton = document.querySelector('#forest')
 
 
 /*----- functions -----*/
-let jsonCharacterObj = localStorage.getItem("characterObj");
-let retrievedCharacterObj = JSON.parse(jsonCharacterObj);
-console.log(retrievedCharacterObj)
-
-function updateCharacterCard(){
-    document.querySelector('#char-name').textContent = localStorage.getItem('charName')
+function renderCharacterCard(){
+    charNameArea.textContent = charName
+    charHealth.textContent = characterObj.stats.Health
+    charStrength.textContent = characterObj.stats.Strength
+    charAgility.textContent = characterObj.stats.Agility
 }
 
-updateCharacterCard()
+renderCharacterCard()
