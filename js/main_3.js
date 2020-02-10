@@ -9,6 +9,8 @@ const snakeState = {
     Agility: 0,
 }
 
+let strModifier = 0;
+
 /*----- cached element references -----*/
 let fightButton = document.querySelector('#fight')
 let mountainsButton = document.querySelector('#mountains')
@@ -19,10 +21,10 @@ let snakeStrength = document.querySelector('#creature-strength')
 let snakeAgility = document.querySelector('#creature-agility')
 
 //combat buttons
-let swing = document.querySelector("#swing")
-let dodge = document.querySelector('#dodge')
-let run = document.querySelector('#run')
-let potions = document.querySelector('#potions')
+let swingBtn = document.querySelector("#swing")
+let dodgeBtn = document.querySelector('#dodge')
+let runBtn = document.querySelector('#run')
+let potionsBtn = document.querySelector('#potions')
 
 
 const snakeObj = {
@@ -35,7 +37,9 @@ const snakeObj = {
 
 /*----- event listeners -----*/
 // fightButton.addEventListener('click', createBattleCards)
-
+swingBtn.addEventListener('click', swing)
+dodgeBtn.addEventListener('click', dodge)
+runBtn.addEventListener('click', run)
 
 
 
@@ -77,56 +81,82 @@ function renderStats(){
     snakeHealth.textContent = snakeState.Health
     snakeStrength.textContent = snakeState.Strength
     snakeAgility.textContent = snakeState.Agility
+
+    charHealth.textContent = characterObj.stats.Health
+    charStrength.textContent = characterObj.stats.Strength
+    charAgility.textContent = characterObj.stats.Agility
 }
 
-renderStats()
 
-function battle(){
-    while (characterObj.stats.Health > 0 || snakeState.Health > 0) {
-        charSwing()
-        creatureSwing() 
+function swing(){
+    charSwing()
+    creatureSwing()
+    characterObj.stats.Strength -= strModifier;
+    strModifier = 0;
+    renderStats()
+}
+
+function dodge(){
+    if (randomizeAgilityMiss(characterObj) > randomizeAgilityMiss(snakeObj)) {
+        console.log(`character strength before modifier ${characterObj.stats.Strength}`)
+        strModifier = 15;
+        characterObj.stats.Strength += strModifier;
+        console.log(`you dodge the creature. Your strength is boosted by ${strModifier} and is now ${characterObj.stats.Strength}`)
     }
-    return;
+    else if (randomizeAgilityMiss(characterObj) < randomizeAgilityMiss(snakeObj)) {
+        console.log('you did not dodge the creatures swing')
+        creatureSwing()
+    }
+    renderStats()
+}
+
+function run(){
+    snakeState.Agility += 15;
+    console.log(`snakeState agility is ${snakeState.Agility} before run attempt`)
+    if (randomizeAgilityMiss(characterObj) > randomizeAgilityMiss(snakeObj)) {
+        console.log(`you successfully ran away`)
+        creaturesCard.style.visibility = 'hidden'
+        combatCard.style.visibility = 'hidden'
+    }
+    else {
+        console.log(`you did not run away`)
+    }
+    snakeState.Agility -= 15;
+    console.log(`snakeState agility is ${snakeState.Agility} after run attempt`)
 }
 
  function charSwing(){
      if (randomizeStrengthSwing(characterObj) > randomizeAgilityMiss(snakeObj)) {
          snakeState.Health -= 10;
-         console.log('you hit!')
+         console.log(`you hit! ${randomizeStrengthSwing(characterObj)} is more than ${randomizeAgilityMiss(snakeObj)}`)
      }
      else {
-         console.log('you miss!')
+         console.log(`you miss! ${randomizeStrengthSwing(characterObj)} is less than ${randomizeAgilityMiss(snakeObj)}`)
      }
  }
 
  function creatureSwing(){
     if (randomizeStrengthSwing(snakeObj) > randomizeAgilityMiss(characterObj)) {
         characterObj.stats.Health -= 10;
-        console.log('creature hit!')
+        console.log(`creature hit! ${randomizeStrengthSwing(snakeObj)} is more than ${randomizeAgilityMiss(characterObj)}`)
     }
     else {
-        console.log('creature miss!')
+        console.log(`creature misses! ${randomizeStrengthSwing(snakeObj)} is less than ${randomizeAgilityMiss(characterObj)}`)
     }
  }
 
- function randomizeStrengthSwing(objChoice){
-     let randSwing = Math.floor(Math.random() * objChoice.stats.Strength) + 1
-     console.log(randSwing)
+ function randomizeStrengthSwing(obj){
+     let randSwing = Math.floor(Math.random() * obj.stats.Strength) + 1
      return randSwing;
  }
- 
- function randomizeAgilityMiss(objChoice){
-     let randDodge = Math.floor(Math.random() * objChoice.stats.Agility) + 1
-     console.log(randDodge)
+
+ function randomizeAgilityMiss(obj){
+     let randDodge = Math.floor(Math.random() * obj.stats.Agility) + 1
      return randDodge;
  }
 
 
 
-//  randomizeStrengthSwing()
-//  randomizeAgilityMiss()
-
-battle()
 
 
 // function createBattleCards(e){
