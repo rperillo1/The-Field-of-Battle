@@ -172,8 +172,8 @@ body {
 .charStats li.list-group-item {
     display: flex;
 }
-/* #char-health, #char-strength, #char-agility {
-    display: flex;
-} */
 
+.creatureStats li.list-group-item {
+    display: flex;
+}
 

@@ -10,25 +10,26 @@
     <link href="https://fonts.googleapis.com/css?family=Quantico:400,400i,700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
- 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script defer src="js/main.js"></script>
+     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script defer src="js/constants.js"></script>
+    <script defer src="js/main_3.js"></script>
 </head>
 <body>
 
     <section class="gameContents gameBack3">
         <div>
             <div id="icon-set1">
-                <a id="town" href=""><i class="fas fa-home icons text-dark"></i>Town</a>
+                <a id="town" href="index_3.html"><i class="fas fa-home icons text-dark"></i>Town</a>
             </div>
             <div id="icon-set2">
-                <a id="mountains" href=""><i class="fas fa-mountain icons text-warning"></i>Mountains</a>
+                <a id="fight" href=""><i class="fas fa-gavel icons text-danger"></i>Fight</a>
             </div>
             <div id="icon-set3">
-                <a id="fight" href=""><i class="fas fa-mountain icons text-danger"></i>Fight</a>
+                <a id="mountains" href="index_4.html"><i class="fas fa-mountain icons text-warning"></i>Mountains</a>
             </div>
         </div>
 
-        <aside class="creatureStats">
+        <aside class="creatureStats" id="creature-stats">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                   <div class="col-md-6">
@@ -38,9 +39,9 @@
                     <div class="card-body">
                       <h5 class="card-title">Venemous Snake</h5>
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Health: <div id="creature-health"></li>
-                        <li class="list-group-item">Strength: <div id="creature-strength"></div></li>
-                        <li class="list-group-item">Agility: <div id="creature-agility"></div></li>
+                        <li class="list-group-item">Health: &nbsp<div id="creature-health"></li>
+                        <li class="list-group-item">Strength: &nbsp<div id="creature-strength"></div></li>
+                        <li class="list-group-item">Agility: &nbsp<div id="creature-agility"></div></li>
                       </ul>
                     </div>
                   </div>

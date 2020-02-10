@@ -1,5 +1,6 @@
 /*----- constants -----*/
 // const beepAudio = new Audio('http://soundbible.com/mp3/Robot_blip-Marianne_Gagnon-120342607.mp3');
+const CHARACTER_OBJ_KEY = 'characterObj';
 
 
 /*----- app's state (variables) -----*/
@@ -10,19 +11,13 @@ const characterState = {
     Modifier: 0
 }
 
-const snakeState = {
-    Health: 0,
-    Strength: 0,
-    Agility: 0,
-    Modifier: 0
-}
 
-const wolfState = {
-    Health: 0,
-    Strength: 0,
-    Agility: 0,
-    Modifier: 0
-}
+// const wolfState = {
+//     Health: 0,
+//     Strength: 0,
+//     Agility: 0,
+//     Modifier: 0
+// }
 
 
 /*----- cached element references -----*/
@@ -38,13 +33,6 @@ const characterObj = {
     }
 }
 
-// const snakeObj = {
-//     stats: {
-//         Health: snakeState.Health,
-//         Strength: snakeState.Strength,
-//         Agility: snakeState.Agility
-//     }
-// }
 
 // const wolfObj = {
 //     stats: {
@@ -72,17 +60,9 @@ let adventureButton = document.querySelector('#adventure')
 // let fightButton = document.querySelector('#fight')
 // let mountainsButton = document.querySelector('#mountains')
 
-//combat buttons
-
-// let swing = document.querySelector("#swing")
-// let dodge = document.querySelector('#dodge')
-// let run = document.querySelector('#run')
-// let potions = document.querySelector('#potions')
-
 
 /*----- event listeners -----*/
 charSubmit.addEventListener('click', CreateChar)
-
 
 
 
@@ -93,6 +73,7 @@ function CreateChar(e){
         characterInfo = document.querySelector('#char-input').value
         charName.textContent = characterInfo
         //creating local storage variables 
+        localStorage.clear()
         localStorage.setItem('charName', characterInfo)
         localStorage.setItem(CHARACTER_OBJ_KEY, JSON.stringify(characterObj));
     
