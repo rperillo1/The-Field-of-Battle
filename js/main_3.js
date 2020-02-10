@@ -12,8 +12,9 @@ const snakeState = {
 let strModifier = 0;
 
 /*----- cached element references -----*/
-let fightButton = document.querySelector('#fight')
-let mountainsButton = document.querySelector('#mountains')
+let fightBtn = document.querySelector('#fight')
+let mountainsBtn = document.querySelector('#mountains')
+let townBtn = document.querySelector('#town')
 let creaturesCard = document.querySelector('.creatureStats')
 let combatCard = document.querySelector('.combat-card')
 let snakeHealth = document.querySelector('#creature-health')
@@ -36,7 +37,7 @@ const snakeObj = {
 }
 
 /*----- event listeners -----*/
-// fightButton.addEventListener('click', createBattleCards)
+fightBtn.addEventListener('click', createBattleCards)
 swingBtn.addEventListener('click', swing)
 dodgeBtn.addEventListener('click', dodge)
 runBtn.addEventListener('click', run)
@@ -85,6 +86,8 @@ function renderStats(){
     charHealth.textContent = characterObj.stats.Health
     charStrength.textContent = characterObj.stats.Strength
     charAgility.textContent = characterObj.stats.Agility
+
+    localStorage.setItem(CHARACTER_OBJ_KEY, JSON.stringify(characterObj));
 }
 
 
@@ -97,13 +100,15 @@ function swing(){
 }
 
 function dodge(){
-    if (randomizeAgilityMiss(characterObj) > randomizeAgilityMiss(snakeObj)) {
+    let charDodgeCheck = randomizeAgility(characterObj)
+    let snakeHitCheck = randomizeAgility(snakeObj)
+    if (charDodgeCheck > snakeHitCheck) {
         console.log(`character strength before modifier ${characterObj.stats.Strength}`)
         strModifier = 15;
         characterObj.stats.Strength += strModifier;
         console.log(`you dodge the creature. Your strength is boosted by ${strModifier} and is now ${characterObj.stats.Strength}`)
     }
-    else if (randomizeAgilityMiss(characterObj) < randomizeAgilityMiss(snakeObj)) {
+    else {
         console.log('you did not dodge the creatures swing')
         creatureSwing()
     }
@@ -111,65 +116,75 @@ function dodge(){
 }
 
 function run(){
-    snakeState.Agility += 15;
-    console.log(`snakeState agility is ${snakeState.Agility} before run attempt`)
-    if (randomizeAgilityMiss(characterObj) > randomizeAgilityMiss(snakeObj)) {
-        console.log(`you successfully ran away`)
+    snakeObj.stats.Agility += 50;
+    console.log(`snakeObj.stats.Agility is ${snakeObj.stats.Agility} before run attempt`)
+    let charRunCheck = randomizeAgility(characterObj)
+    let snakeCatchCheck = randomizeAgility(snakeObj)
+    if (charRunCheck > snakeCatchCheck) {
+        console.log(`you successfully ran away, snake rolled ${snakeCatchCheck} and character rolled ${charRunCheck}`)
         creaturesCard.style.visibility = 'hidden'
-        combatCard.style.visibility = 'hidden'
+        townBtn.style.visibility = 'visible'
+        fightBtn.style.visibility = 'visible'
     }
     else {
-        console.log(`you did not run away`)
+        console.log(`you did not run away, snake rolled ${snakeCatchCheck} and character rolled ${charRunCheck}`)
+        creatureSwing()
     }
-    snakeState.Agility -= 15;
-    console.log(`snakeState agility is ${snakeState.Agility} after run attempt`)
+    snakeObj.stats.Agility -= 50;
+    console.log(`snakeObj.stats.Agility is ${snakeObj.stats.Agility} after run attempt`)
+    renderStats()
 }
 
  function charSwing(){
-     if (randomizeStrengthSwing(characterObj) > randomizeAgilityMiss(snakeObj)) {
+     let charSwingCheck = randomizeStrength(characterObj)
+     let snakeMissCheck = randomizeAgility(snakeObj)
+     if (charSwingCheck > snakeMissCheck) {
          snakeState.Health -= 10;
-         console.log(`you hit! ${randomizeStrengthSwing(characterObj)} is more than ${randomizeAgilityMiss(snakeObj)}`)
+         console.log(`you hit! ${charSwingCheck} is more than ${snakeMissCheck}`)
      }
      else {
-         console.log(`you miss! ${randomizeStrengthSwing(characterObj)} is less than ${randomizeAgilityMiss(snakeObj)}`)
+         console.log(`you miss! ${charSwingCheck} is less than ${snakeMissCheck}`)
      }
  }
 
  function creatureSwing(){
-    if (randomizeStrengthSwing(snakeObj) > randomizeAgilityMiss(characterObj)) {
+    let snakeSwingCheck = randomizeStrength(snakeObj)
+    let charMissCheck = randomizeAgility(characterObj)
+    if (snakeSwingCheck > charMissCheck) {
         characterObj.stats.Health -= 10;
-        console.log(`creature hit! ${randomizeStrengthSwing(snakeObj)} is more than ${randomizeAgilityMiss(characterObj)}`)
+        console.log(`creature hit! ${snakeSwingCheck} is more than ${charMissCheck}`)
     }
     else {
-        console.log(`creature misses! ${randomizeStrengthSwing(snakeObj)} is less than ${randomizeAgilityMiss(characterObj)}`)
+        console.log(`creature misses! ${snakeSwingCheck} is less than ${charMissCheck}`)
     }
  }
 
- function randomizeStrengthSwing(obj){
+ function randomizeStrength(obj){
      let randSwing = Math.floor(Math.random() * obj.stats.Strength) + 1
+     console.log(randSwing)
      return randSwing;
  }
 
- function randomizeAgilityMiss(obj){
+ function randomizeAgility(obj){
      let randDodge = Math.floor(Math.random() * obj.stats.Agility) + 1
+     console.log(randDodge)
      return randDodge;
  }
 
 
 
+function createBattleCards(e){
+    setTimeout(function(){
+        $('aside#creatureStats.creature-stats').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
+    },600);
+}
 
 
-// function createBattleCards(e){
-//     setTimeout(function(){
-//         $('aside#creatureStats.creature-stats').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
-//     },600);
-// }
+function init(){
+    mountainsBtn.style.visibility = 'hidden'
+    fightBtn.style.visibility = 'hidden'
+    townBtn.style.visibility = 'hidden'
+    renderStats()
+}
 
-
-// function init(){
-//     mountainsButton.style.visibility = 'hidden'
-//     creaturesCard.style.visibility = 'hidden'
-//     combatCard.style.visibility = 'hidden'
-// }
-
-// init()
+init()
