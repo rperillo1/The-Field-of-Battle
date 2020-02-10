@@ -12,13 +12,6 @@ const characterState = {
 }
 
 
-// const wolfState = {
-//     Health: 0,
-//     Strength: 0,
-//     Agility: 0,
-//     Modifier: 0
-// }
-
 
 /*----- cached element references -----*/
 const characterObj = {
@@ -34,14 +27,6 @@ const characterObj = {
 }
 
 
-// const wolfObj = {
-//     stats: {
-//         Health: wolfState.Health,
-//         Strength: wolfState.Strength,
-//         Agility: wolfState.Agility
-//     }
-// }
-
 //character creation form & character aside
 let radioStr = document.querySelector('#radio-strong')
 let radioAgi = document.querySelector('#radio-fast')
@@ -53,12 +38,6 @@ let charAgility = document.querySelector('#char-agility')
 
 //navigations buttons
 let adventureButton = document.querySelector('#adventure')
-
-// let homeButton = document.querySelector('#home')
-// let forestButton = document.querySelector('#forest')
-// let townButton = document.querySelector('#town')
-// let fightButton = document.querySelector('#fight')
-// let mountainsButton = document.querySelector('#mountains')
 
 
 /*----- event listeners -----*/

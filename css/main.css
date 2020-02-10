@@ -177,3 +177,6 @@ body {
     display: flex;
 }
 
+.creatureStats2 li.list-group-item {
+    display: flex;
+}

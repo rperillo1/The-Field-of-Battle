@@ -1,9 +1,5 @@
-/*----- constants -----*/
-// const beepAudio = new Audio('http://soundbible.com/mp3/Robot_blip-Marianne_Gagnon-120342607.mp3');
-
-
 /*----- app's state (variables) -----*/
-const snakeState = {
+const wolfState = {
     Health: 0,
     Strength: 0,
     Agility: 0,
@@ -13,13 +9,12 @@ let strModifier = 0;
 
 /*----- cached element references -----*/
 let fightBtn = document.querySelector('#fight')
-let mountainsBtn = document.querySelector('#mountains')
-let townBtn = document.querySelector('#town')
-let creaturesCard = document.querySelector('.creatureStats')
+let forestBtn = document.querySelector('#forest')
+let creaturesCard = document.querySelector('.creatureStats2')
 let combatCard = document.querySelector('.combat-card')
-let snakeHealth = document.querySelector('#creature-health')
-let snakeStrength = document.querySelector('#creature-strength')
-let snakeAgility = document.querySelector('#creature-agility')
+let wolfHealth = document.querySelector('#creature-health')
+let wolfStrength = document.querySelector('#creature-strength')
+let wolfAgility = document.querySelector('#creature-agility')
 
 //combat buttons
 let swingBtn = document.querySelector("#swing")
@@ -28,11 +23,11 @@ let runBtn = document.querySelector('#run')
 let potionsBtn = document.querySelector('#potions')
 
 
-const snakeObj = {
+const wolfObj = {
     stats: {
-        Health: snakeState.Health,
-        Strength: snakeState.Strength,
-        Agility: snakeState.Agility
+        Health: wolfState.Health,
+        Strength: wolfState.Strength,
+        Agility: wolfState.Agility
     }
 }
 
@@ -52,10 +47,9 @@ function isDead(){
         alert("game over, you died")
         disableButtons()
     }
-    else if (snakeObj.stats.Health < 0) {
-        alert("you beat the snake, move to the mountains")
+    else if (wolfObj.stats.Health < 0) {
+        alert("you beat the wolf, YOU BEAT THE GAME")
         disableButtons()
-        mountainsBtn.style.visibility = 'visible'
     }
 }
 
@@ -66,38 +60,35 @@ function disableButtons(){
     runBtn.disabled = true;
 }
 
-//generates the snakes stats
+
 function generateStats(){
-    if (snakeObj.stats.Health === 0) {
+    if (wolfObj.stats.Health === 0) {
         generateHealth()
     }
-    if (snakeObj.stats.Strength === 0) {
+    if (wolfObj.stats.Strength === 0) {
         generateStr()
     }
-    if (snakeObj.stats.Agility === 0) {
+    if (wolfObj.stats.Agility === 0) {
         generateAgi()
     }
 }
 
 
 function generateHealth(){
-    let min = 40, max = 90
-    snakeState.Health = Math.floor(Math.random() * (max - min + 1) + min)
+    let min = 55, max = 90
+    wolfState.Health = Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 function generateStr(){
-    let min = 15, max = 40
-    snakeState.Strength = Math.floor(Math.random() * (max - min + 1) + min)
+    let min = 25, max = 40
+    wolfState.Strength = Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 function generateAgi(){
-    let min = 15, max = 40
-    snakeState.Agility = Math.floor(Math.random() * (max - min + 1) + min)
+    let min = 25, max = 40
+    wolfState.Agility = Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-
-
-//combat buttons functionality
 function swing(){
     charSwing()
     creatureSwing()
@@ -109,33 +100,33 @@ function swing(){
 
 function charSwing(){
     let charSwingCheck = randomizeStrength(characterObj)
-    let snakeMissCheck = randomizeAgility(snakeObj)
-    if (charSwingCheck > snakeMissCheck) {
-        snakeState.Health -= 10;
-        console.log(`you hit! ${charSwingCheck} is more than ${snakeMissCheck}`)
+    let wolfMissCheck = randomizeAgility(wolfObj)
+    if (charSwingCheck > wolfMissCheck) {
+        wolfState.Health -= 10;
+        console.log(`you hit! ${charSwingCheck} is more than ${wolfMissCheck}`)
     }
     else {
-        console.log(`you miss! ${charSwingCheck} is less than ${snakeMissCheck}`)
+        console.log(`you miss! ${charSwingCheck} is less than ${wolfMissCheck}`)
     }
 }
 
 function creatureSwing(){
-   let snakeSwingCheck = randomizeStrength(snakeObj)
+   let wolfSwingCheck = randomizeStrength(wolfObj)
    let charMissCheck = randomizeAgility(characterObj)
-   if (snakeSwingCheck > charMissCheck) {
+   if (wolfSwingCheck > charMissCheck) {
        characterObj.stats.Health -= 10;
-       console.log(`creature hit! ${snakeSwingCheck} is more than ${charMissCheck}`)
+       console.log(`creature hit! ${wolfSwingCheck} is more than ${charMissCheck}`)
    }
    else {
-       console.log(`creature misses! ${snakeSwingCheck} is less than ${charMissCheck}`)
+       console.log(`creature misses! ${wolfSwingCheck} is less than ${charMissCheck}`)
    }
 }
 
 
 function dodge(){
     let charDodgeCheck = randomizeAgility(characterObj)
-    let snakeHitCheck = randomizeAgility(snakeObj)
-    if (charDodgeCheck > snakeHitCheck) {
+    let wolfHitCheck = randomizeAgility(wolfObj)
+    if (charDodgeCheck > wolfHitCheck) {
         console.log(`character strength before modifier ${characterObj.stats.Strength}`)
         strModifier = 15;
         characterObj.stats.Strength += strModifier;
@@ -151,22 +142,22 @@ function dodge(){
 
 
 function run(){
-    snakeObj.stats.Agility += 50;
-    console.log(`snakeObj.stats.Agility is ${snakeObj.stats.Agility} before run attempt`)
+    wolfObj.stats.Agility += 50;
+    console.log(`wolfObj.stats.Agility is ${wolfObj.stats.Agility} before run attempt`)
     let charRunCheck = randomizeAgility(characterObj)
-    let snakeCatchCheck = randomizeAgility(snakeObj)
-    if (charRunCheck > snakeCatchCheck) {
-        console.log(`you successfully ran away, snake rolled ${snakeCatchCheck} and character rolled ${charRunCheck}`)
+    let wolfCatchCheck = randomizeAgility(wolfObj)
+    if (charRunCheck > wolfCatchCheck) {
+        console.log(`you successfully ran away, wolf rolled ${wolfCatchCheck} and character rolled ${charRunCheck}`)
         creaturesCard.style.visibility = 'hidden'
-        townBtn.style.visibility = 'visible'
+        forestBtn.style.visibility = 'visible'
         fightBtn.style.visibility = 'visible'
     }
     else {
-        console.log(`you did not run away, snake rolled ${snakeCatchCheck} and character rolled ${charRunCheck}`)
+        console.log(`you did not run away, wolf rolled ${wolfCatchCheck} and character rolled ${charRunCheck}`)
         creatureSwing()
     }
-    snakeObj.stats.Agility -= 50;
-    console.log(`snakeObj.stats.Agility is ${snakeObj.stats.Agility} after run attempt`)
+    wolfObj.stats.Agility -= 50;
+    console.log(`wolfObj.stats.Agility is ${wolfObj.stats.Agility} after run attempt`)
     renderStats()
     isDead()
 }
@@ -189,20 +180,20 @@ function run(){
 //fades in the battle cards when player clicks fight button
 function createBattleCards(e){
     setTimeout(function(){
-        $('aside#creature-stats.creatureStats').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
-    },600);
+        $('aside#creature-stats2.creatureStats2').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
+    }, 1000);
 }
 
 
 //renders the character card, creature card as well as local storage to match changes
 function renderStats(){
     generateStats()
-    snakeObj.stats.Health = snakeState.Health
-    snakeObj.stats.Strength = snakeState.Strength
-    snakeObj.stats.Agility = snakeState.Agility
-    snakeHealth.textContent = snakeState.Health
-    snakeStrength.textContent = snakeState.Strength
-    snakeAgility.textContent = snakeState.Agility
+    wolfObj.stats.Health = wolfState.Health
+    wolfObj.stats.Strength = wolfState.Strength
+    wolfObj.stats.Agility = wolfState.Agility
+    wolfHealth.textContent = wolfState.Health
+    wolfStrength.textContent = wolfState.Strength
+    wolfAgility.textContent = wolfState.Agility
 
     charHealth.textContent = characterObj.stats.Health
     charStrength.textContent = characterObj.stats.Strength
@@ -213,9 +204,8 @@ function renderStats(){
 
 
 function init(){
-    mountainsBtn.style.visibility = 'hidden'
     fightBtn.style.visibility = 'hidden'
-    townBtn.style.visibility = 'hidden'
+    forestBtn.style.visibility = 'hidden'
     renderStats()
 }
 
