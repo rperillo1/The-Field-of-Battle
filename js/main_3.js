@@ -112,17 +112,17 @@ function swing(){
     setTimeout(function(){
         positiveDisplayArea.textContent = ''
         negativeDisplayArea.textContent = ''
-    }, 2250);
+    }, 2000);
     setTimeout(function(){
         creatureSwing()
-    },2250);
+        renderStats()
+        isDead()
+    },2001);
     characterObj.stats.Strength -= strModifier;
     strModifier = 0;
-    renderStats()
-    isDead()
     setTimeout(function(){
         undisableButtons()
-    }, 4600);
+    }, 4000);
 }
 
 function charSwing(){
@@ -145,7 +145,7 @@ function creatureSwing(){
        negativeDisplayArea.innerHTML = `Creature hit you! <br> It rolled ${snakeSwingCheck} and you rolled ${charMissCheck}`
    }
    else {
-       positiveDisplayArea.innerHTML = `Creature misses! <br> It rolled ${snakeSwingCheck} and you rolled ${charMissCheck}`
+       positiveDisplayArea.innerHTML = `Creature misses you! <br> It rolled ${snakeSwingCheck} and you rolled ${charMissCheck}`
    }
 }
 
@@ -160,7 +160,7 @@ function dodge(){
         positiveDisplayArea.innerHTML = `Dodged succesfully! <br> Your strength is boosted by ${strModifier}`
     }
     else {
-        negativeDisplayArea.innerHTML = 'You did not dodge the creatures swing and were hit for 10 damage'
+        negativeDisplayArea.innerHTML = 'You did not dodge the creatures swing. <br> Creature swings at you!'
         creatureSwing()
     }
     renderStats()
@@ -193,13 +193,11 @@ function run(){
 //randomizes a variable based on character or creatures stats from 1 to max Str/Agi
  function randomizeStrength(obj){
      let randSwing = Math.floor(Math.random() * obj.stats.Strength) + 1
-     console.log(randSwing)
      return randSwing;
  }
 
  function randomizeAgility(obj){
      let randDodge = Math.floor(Math.random() * obj.stats.Agility) + 1
-     console.log(randDodge)
      return randDodge;
  }
 

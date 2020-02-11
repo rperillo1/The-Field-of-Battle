@@ -60,6 +60,13 @@ function disableButtons(){
     runBtn.disabled = true;
 }
 
+function undisableButtons() {
+    fightBtn.disabled = false;
+    swingBtn.disabled = false;
+    dodgeBtn.disabled = false;
+    runBtn.disabled = false;
+}
+
 
 function generateStats(){
     if (wolfObj.stats.Health === 0) {
@@ -89,13 +96,24 @@ function generateAgi(){
     wolfState.Agility = Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+
 function swing(){
+    disableButtons()
     charSwing()
-    creatureSwing()
+    setTimeout(function(){
+        positiveDisplayArea.textContent = ''
+        negativeDisplayArea.textContent = ''
+    }, 2000);
+    setTimeout(function(){
+        creatureSwing()
+        renderStats()
+        isDead()
+    },2001);
     characterObj.stats.Strength -= strModifier;
     strModifier = 0;
-    renderStats()
-    isDead()
+    setTimeout(function(){
+        undisableButtons()
+    }, 4000);
 }
 
 function charSwing(){
@@ -103,10 +121,10 @@ function charSwing(){
     let wolfMissCheck = randomizeAgility(wolfObj)
     if (charSwingCheck > wolfMissCheck) {
         wolfState.Health -= 10;
-        console.log(`you hit! ${charSwingCheck} is more than ${wolfMissCheck}`)
+        positiveDisplayArea.innerHTML = `You hit the wolf! <br> You rolled ${charSwingCheck} and the creature rolled ${wolfMissCheck}`
     }
     else {
-        console.log(`you miss! ${charSwingCheck} is less than ${wolfMissCheck}`)
+        negativeDisplayArea.innerHTML = `You miss the wolf! <br> You rolled ${charSwingCheck} and the creature rolled ${wolfMissCheck}`
     }
 }
 
@@ -115,11 +133,11 @@ function creatureSwing(){
    let charMissCheck = randomizeAgility(characterObj)
    if (wolfSwingCheck > charMissCheck) {
        characterObj.stats.Health -= 10;
-       console.log(`creature hit! ${wolfSwingCheck} is more than ${charMissCheck}`)
+       negativeDisplayArea.innerHTML = `Creature hits you! <br> It rolled ${wolfSwingCheck} and you rolled ${charMissCheck}`
    }
    else {
-       console.log(`creature misses! ${wolfSwingCheck} is less than ${charMissCheck}`)
-   }
+    positiveDisplayArea.innerHTML = `Creature misses you! <br> It rolled ${wolfSwingCheck} and you rolled ${charMissCheck}`
+}
 }
 
 
@@ -130,10 +148,10 @@ function dodge(){
         console.log(`character strength before modifier ${characterObj.stats.Strength}`)
         strModifier = 15;
         characterObj.stats.Strength += strModifier;
-        console.log(`you dodge the creature. Your strength is boosted by ${strModifier} and is now ${characterObj.stats.Strength}`)
+        positiveDisplayArea.innerHTML = `Dodged succesfully! <br> Your strength is boosted by ${strModifier}`
     }
     else {
-        console.log('you did not dodge the creatures swing')
+        negativeDisplayArea.innerHTML = 'You did not dodge the creatures swing. <br> Creature swings at you!'
         creatureSwing()
     }
     renderStats()
@@ -147,13 +165,13 @@ function run(){
     let charRunCheck = randomizeAgility(characterObj)
     let wolfCatchCheck = randomizeAgility(wolfObj)
     if (charRunCheck > wolfCatchCheck) {
-        console.log(`you successfully ran away, wolf rolled ${wolfCatchCheck} and character rolled ${charRunCheck}`)
+        positiveDisplayArea.innerHTML = `You successfully ran away, <br> wolf rolled ${wolfCatchCheck} and character rolled ${charRunCheck}`
         creaturesCard.style.visibility = 'hidden'
         forestBtn.style.visibility = 'visible'
         fightBtn.style.visibility = 'visible'
     }
     else {
-        console.log(`you did not run away, wolf rolled ${wolfCatchCheck} and character rolled ${charRunCheck}`)
+        negativeDisplayArea.innerHTML = `you did not run away, <br> wolf rolled ${wolfCatchCheck} and character rolled ${charRunCheck}`
         creatureSwing()
     }
     wolfObj.stats.Agility -= 50;

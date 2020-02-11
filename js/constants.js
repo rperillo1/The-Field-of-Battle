@@ -14,6 +14,8 @@ let charAgility = document.querySelector('#char-agility')
 let positiveDisplayArea = document.querySelector('#h3_1')
 let negativeDisplayArea = document.querySelector('#h3_2')
 
+let percentHealth = characterObj.stats.Health/characterObj.stats.MaxHealth
+console.log(percentHealth)
 
 function renderCharacterCard(){
     charNameArea.textContent = charName

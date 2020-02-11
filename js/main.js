@@ -19,7 +19,7 @@ const characterObj = {
         Health: characterState.Health,
         Strength: characterState.Strength,
         Agility: characterState.Agility,
-        MaxHealth: characterState.Health
+        MaxHealth: characterState.Health,
     },
     inventory: {
         potions: [],
