@@ -123,6 +123,7 @@ function renderStats(){
 
 function init(){
     adventureButton.style.visibility = 'hidden'
+    renderHealthBar()
 }
 
 init()

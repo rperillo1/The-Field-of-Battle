@@ -13,6 +13,7 @@ sleepBtn.addEventListener('click', restoreHealth)
 function restoreHealth(){
     fades()
     renderHealth()
+    renderHealthBar()
 }
 
 function renderHealth(){

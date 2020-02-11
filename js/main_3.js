@@ -225,6 +225,7 @@ function renderStats(){
     charAgility.textContent = characterObj.stats.Agility
 
     localStorage.setItem(CHARACTER_OBJ_KEY, JSON.stringify(characterObj));
+    renderHealthBar()
 }
 
 

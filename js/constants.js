@@ -14,8 +14,8 @@ let charAgility = document.querySelector('#char-agility')
 let positiveDisplayArea = document.querySelector('#h3_1')
 let negativeDisplayArea = document.querySelector('#h3_2')
 
-let percentHealth = characterObj.stats.Health/characterObj.stats.MaxHealth
-console.log(percentHealth)
+let healthBar = document.querySelector('.progress-bar')
+
 
 function renderCharacterCard(){
     charNameArea.textContent = charName
@@ -24,4 +24,13 @@ function renderCharacterCard(){
     charAgility.textContent = characterObj.stats.Agility
 }
 
+
+
+function renderHealthBar(){
+    let percentHealth = Math.round(characterObj.stats.Health/characterObj.stats.MaxHealth * 100)
+    let percentString = "width: " + percentHealth + "%"
+    healthBar.style = percentString
+}
+
 renderCharacterCard()
+renderHealthBar()

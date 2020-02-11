@@ -184,13 +184,11 @@ function run(){
 //randomizes a variable based on character or creatures stats from 1 to max Str/Agi
  function randomizeStrength(obj){
      let randSwing = Math.floor(Math.random() * obj.stats.Strength) + 1
-     console.log(randSwing)
      return randSwing;
  }
 
  function randomizeAgility(obj){
      let randDodge = Math.floor(Math.random() * obj.stats.Agility) + 1
-     console.log(randDodge)
      return randDodge;
  }
 
@@ -218,6 +216,7 @@ function renderStats(){
     charAgility.textContent = characterObj.stats.Agility
 
     localStorage.setItem(CHARACTER_OBJ_KEY, JSON.stringify(characterObj));
+    renderHealthBar()
 }
 
 
