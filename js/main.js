@@ -18,7 +18,8 @@ const characterObj = {
     stats: {
         Health: characterState.Health,
         Strength: characterState.Strength,
-        Agility: characterState.Agility
+        Agility: characterState.Agility,
+        MaxHealth: characterState.Health
     },
     inventory: {
         potions: [],
@@ -113,6 +114,7 @@ function renderStats(){
     characterObj.stats.Health = characterState.Health
     characterObj.stats.Strength = characterState.Strength
     characterObj.stats.Agility = characterState.Agility
+    characterObj.stats.MaxHealth = characterState.Health
     charHealth.textContent = characterState.Health
     charStrength.textContent = characterState.Strength
     charAgility.textContent = characterState.Agility

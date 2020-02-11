@@ -12,23 +12,31 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script defer src="js/constants.js"></script>
-    <script defer src="js/main_2.js"></script>
+    <script defer src="js/home.js"></script>
 </head>
 <body>
-
-    <section class="gameContents gameBack2">
-        <div>
-            <div id="icon-set1">
-                <a id="home" href="home.html"><i class="fas fa-house-damage icons text-dark"></i>Home</a>
-                <a id="alchemist" href=""><i class="fas fa-wine-bottle icons text-dark"></i>Alchemist</a>
-                <a id="weaponsmith" href=""><i class="fas fa-gavel icons text-dark"></i>Weaponsmith</a>
-            </div>
-            <div id="icon-set2">
-                <a id="forest" href="index_3.html"><i class="fas fa-tree icons text-warning"></i>Forest</a>
-                <!-- <a id="mountains" href=""><i class="fas fa-mountain icons text-warning"></i>Mountains</a> -->
+  
+    <section class="gameContents homeBack">
+        <div id="icon-set1">
+            <a id="town2" href="index_2.html"><i class="fas fa-chess-rook icons text-warning"></i>Town</a>
+        </div>
+        
+        <div id="sleep-card">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">Hit the sack..</h5>
+                <p class="card-text">Click the sleep button below, and you will regain full HEALTH</p>
+                <button type="button" id="sleep-button" class="btn btn-dark">Sleep</button>
+                </div>
             </div>
         </div>
+
+        <button id="loading" style="display:none;" class="btn btn-primary" type="button" disabled>
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Sleeping...
+        </button>
     </section>
+
 
     <aside class="charStats">
         <div class="card">
@@ -39,7 +47,7 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Health: &nbsp<div id="char-health"></div></li>
-              <li class="list-group-item">Strength: &nbsp<div id="char-strength"></div></li>
+              <li class="list-group-item">Strength: &nbsp<div id="char-strength"></div> </li>
               <li class="list-group-item">Agility: &nbsp<div id="char-agility"></div></li>
             </ul>
             <div class="card-body">
