@@ -11,6 +11,9 @@ let charHealth = document.querySelector('#char-health')
 let charStrength = document.querySelector('#char-strength')
 let charAgility = document.querySelector('#char-agility')
 
+let positiveDisplayArea = document.querySelector('#h3_1')
+let negativeDisplayArea = document.querySelector('#h3_2')
+
 
 function renderCharacterCard(){
     charNameArea.textContent = charName

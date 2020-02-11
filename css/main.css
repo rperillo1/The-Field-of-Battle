@@ -214,3 +214,25 @@ body {
     float: right;
     color: rgb(197, 168, 5);
 }
+
+#h3_1 {
+    color: white;
+    background-color: rgba(147, 204, 139, 0.7);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    min-width: 500px;
+}
+
+#h3_2 {
+    color: white;
+    background-color: rgb(195, 161, 161, .7);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    min-width: 500px;
+}

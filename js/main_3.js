@@ -21,6 +21,7 @@ let snakeHealth = document.querySelector('#creature-health')
 let snakeStrength = document.querySelector('#creature-strength')
 let snakeAgility = document.querySelector('#creature-agility')
 
+
 //combat buttons
 let swingBtn = document.querySelector("#swing")
 let dodgeBtn = document.querySelector('#dodge')
@@ -66,6 +67,13 @@ function disableButtons(){
     runBtn.disabled = true;
 }
 
+function undisableButtons() {
+    fightBtn.disabled = false;
+    swingBtn.disabled = false;
+    dodgeBtn.disabled = false;
+    runBtn.disabled = false;
+}
+
 //generates the snakes stats
 function generateStats(){
     if (snakeObj.stats.Health === 0) {
@@ -99,12 +107,22 @@ function generateAgi(){
 
 //combat buttons functionality
 function swing(){
+    disableButtons()
     charSwing()
-    creatureSwing()
+    setTimeout(function(){
+        positiveDisplayArea.textContent = ''
+        negativeDisplayArea.textContent = ''
+    }, 2250);
+    setTimeout(function(){
+        creatureSwing()
+    },2250);
     characterObj.stats.Strength -= strModifier;
     strModifier = 0;
     renderStats()
     isDead()
+    setTimeout(function(){
+        undisableButtons()
+    }, 4600);
 }
 
 function charSwing(){
@@ -112,10 +130,10 @@ function charSwing(){
     let snakeMissCheck = randomizeAgility(snakeObj)
     if (charSwingCheck > snakeMissCheck) {
         snakeState.Health -= 10;
-        console.log(`you hit! ${charSwingCheck} is more than ${snakeMissCheck}`)
+        positiveDisplayArea.innerHTML = `You hit the snake! <br> You rolled ${charSwingCheck} and the creature rolled ${snakeMissCheck}`
     }
     else {
-        console.log(`you miss! ${charSwingCheck} is less than ${snakeMissCheck}`)
+        negativeDisplayArea.innerHTML = `You miss! <br> You rolled ${charSwingCheck} and the creature rolled ${snakeMissCheck}`
     }
 }
 
@@ -124,10 +142,10 @@ function creatureSwing(){
    let charMissCheck = randomizeAgility(characterObj)
    if (snakeSwingCheck > charMissCheck) {
        characterObj.stats.Health -= 10;
-       console.log(`creature hit! ${snakeSwingCheck} is more than ${charMissCheck}`)
+       negativeDisplayArea.innerHTML = `Creature hit you! <br> It rolled ${snakeSwingCheck} and you rolled ${charMissCheck}`
    }
    else {
-       console.log(`creature misses! ${snakeSwingCheck} is less than ${charMissCheck}`)
+       positiveDisplayArea.innerHTML = `Creature misses! <br> It rolled ${snakeSwingCheck} and you rolled ${charMissCheck}`
    }
 }
 
@@ -139,10 +157,10 @@ function dodge(){
         console.log(`character strength before modifier ${characterObj.stats.Strength}`)
         strModifier = 15;
         characterObj.stats.Strength += strModifier;
-        console.log(`you dodge the creature. Your strength is boosted by ${strModifier} and is now ${characterObj.stats.Strength}`)
+        positiveDisplayArea.innerHTML = `Dodged succesfully! <br> Your strength is boosted by ${strModifier}`
     }
     else {
-        console.log('you did not dodge the creatures swing')
+        negativeDisplayArea.innerHTML = 'You did not dodge the creatures swing and were hit for 10 damage'
         creatureSwing()
     }
     renderStats()
@@ -156,13 +174,13 @@ function run(){
     let charRunCheck = randomizeAgility(characterObj)
     let snakeCatchCheck = randomizeAgility(snakeObj)
     if (charRunCheck > snakeCatchCheck) {
-        console.log(`you successfully ran away, snake rolled ${snakeCatchCheck} and character rolled ${charRunCheck}`)
+        positiveDisplayArea.innerHTML = `You successfully ran away, <br> snake rolled ${snakeCatchCheck} and character rolled ${charRunCheck}`
         creaturesCard.style.visibility = 'hidden'
         townBtn.style.visibility = 'visible'
         fightBtn.style.visibility = 'visible'
     }
     else {
-        console.log(`you did not run away, snake rolled ${snakeCatchCheck} and character rolled ${charRunCheck}`)
+        negativeDisplayArea.innerHTML = `you did not run away, <br> snake rolled ${snakeCatchCheck} and character rolled ${charRunCheck}`
         creatureSwing()
     }
     snakeObj.stats.Agility -= 50;
