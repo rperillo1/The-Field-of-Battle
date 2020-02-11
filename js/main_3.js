@@ -17,6 +17,7 @@ let mountainsBtn = document.querySelector('#mountains')
 let townBtn = document.querySelector('#town')
 let creaturesCard = document.querySelector('.creatureStats')
 let combatCard = document.querySelector('.combat-card')
+let potionCard = document.querySelector('.potion-card')
 let snakeHealth = document.querySelector('#creature-health')
 let snakeStrength = document.querySelector('#creature-strength')
 let snakeAgility = document.querySelector('#creature-agility')
@@ -43,6 +44,7 @@ fightBtn.addEventListener('click', createBattleCards)
 swingBtn.addEventListener('click', swing)
 dodgeBtn.addEventListener('click', dodge)
 runBtn.addEventListener('click', run)
+potionsBtn.addEventListener('click', potionMenu)
 
 
 
@@ -113,17 +115,17 @@ function swing(){
     setTimeout(function(){
         positiveDisplayArea.textContent = ''
         negativeDisplayArea.textContent = ''
-    }, 2000);
+    }, 1700);
     setTimeout(function(){
         creatureSwing()
         renderStats()
         isDead()
-    },2001);
+    },1701);
     characterObj.stats.Strength -= strModifier;
     strModifier = 0;
     setTimeout(function(){
         undisableButtons()
-    }, 4000);
+    }, 2400);
 }
 
 function charSwing(){
@@ -159,6 +161,7 @@ function dodge(){
         strModifier = 15;
         characterObj.stats.Strength += strModifier;
         positiveDisplayArea.innerHTML = `Dodged succesfully! <br> Your strength is boosted by ${strModifier}`
+        dodgeBtn.disabled = true;
     }
     else {
         negativeDisplayArea.innerHTML = 'You did not dodge the creatures swing. <br> Creature swings at you!'
@@ -210,6 +213,10 @@ function createBattleCards(e){
     },600);
 }
 
+function potionMenu(){
+    potionCard.style.visibility = 'visible'
+}
+
 function renderHealthBarSnake(){
     let percentHealth = Math.round(snakeObj.stats.Health/snakeObj.stats.MaxHealth * 100)
     let percentString = "width: " + percentHealth + "%"
@@ -245,6 +252,7 @@ function init(){
     mountainsBtn.style.visibility = 'hidden'
     fightBtn.style.visibility = 'hidden'
     townBtn.style.visibility = 'hidden'
+    potionCard.style.visibility = 'hidden'
     renderStats()
 }
 

@@ -104,17 +104,17 @@ function swing(){
     setTimeout(function(){
         positiveDisplayArea.textContent = ''
         negativeDisplayArea.textContent = ''
-    }, 2000);
+    }, 1700);
     setTimeout(function(){
         creatureSwing()
         renderStats()
         isDead()
-    },2001);
+    },1701);
     characterObj.stats.Strength -= strModifier;
     strModifier = 0;
     setTimeout(function(){
         undisableButtons()
-    }, 4000);
+    }, 2400);
 }
 
 function charSwing(){
@@ -221,7 +221,7 @@ function renderStats(){
     if (wolfObj.stats.MaxHealth === null) {
         wolfObj.stats.MaxHealth = wolfState.Health
     }
-    
+
     charHealth.textContent = characterObj.stats.Health
     charStrength.textContent = characterObj.stats.Strength
     charAgility.textContent = characterObj.stats.Agility

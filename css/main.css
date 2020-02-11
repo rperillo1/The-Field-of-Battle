@@ -236,3 +236,12 @@ body {
     padding: 0 10px;
     min-width: 400px;
 }
+
+li.list-group-item.potion{
+    padding: 3px 0;
+}
+
+button.btn.btn-light {
+    padding: 0;
+    width: 100%;
+}

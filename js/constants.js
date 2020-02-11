@@ -29,8 +29,11 @@ function renderCharacterCard(){
 
 function renderHealthBar(){
     let percentHealth = Math.round(characterObj.stats.Health/characterObj.stats.MaxHealth * 100)
-    let percentString = "width: " + percentHealth + "%"
+    let percentString = "width: " + percentHealth + "%";
     healthBar.style = percentString
+    console.log(percentString)
+    console.log(characterObj.stats.MaxHealth)
+    console.log(characterObj.stats.Health)
 }
 
 renderCharacterCard()
