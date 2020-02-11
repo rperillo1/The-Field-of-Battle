@@ -33,7 +33,8 @@ const snakeObj = {
     stats: {
         Health: snakeState.Health,
         Strength: snakeState.Strength,
-        Agility: snakeState.Agility
+        Agility: snakeState.Agility,
+        MaxHealth: null
     }
 }
 
@@ -209,6 +210,12 @@ function createBattleCards(e){
     },600);
 }
 
+function renderHealthBarSnake(){
+    let percentHealth = Math.round(snakeObj.stats.Health/snakeObj.stats.MaxHealth * 100)
+    let percentString = "width: " + percentHealth + "%"
+    healthBarSnake.style = percentString
+}
+
 
 //renders the character card, creature card as well as local storage to match changes
 function renderStats(){
@@ -220,12 +227,17 @@ function renderStats(){
     snakeStrength.textContent = snakeState.Strength
     snakeAgility.textContent = snakeState.Agility
 
+    if (snakeObj.stats.MaxHealth === null) {
+        snakeObj.stats.MaxHealth = snakeState.Health
+    }
+    
     charHealth.textContent = characterObj.stats.Health
     charStrength.textContent = characterObj.stats.Strength
     charAgility.textContent = characterObj.stats.Agility
 
     localStorage.setItem(CHARACTER_OBJ_KEY, JSON.stringify(characterObj));
     renderHealthBar()
+    renderHealthBarSnake()
 }
 
 

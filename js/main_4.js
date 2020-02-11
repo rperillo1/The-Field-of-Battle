@@ -27,7 +27,8 @@ const wolfObj = {
     stats: {
         Health: wolfState.Health,
         Strength: wolfState.Strength,
-        Agility: wolfState.Agility
+        Agility: wolfState.Agility,
+        MaxHealth: null
     }
 }
 
@@ -200,6 +201,12 @@ function createBattleCards(e){
     }, 1000);
 }
 
+function renderHealthBarWolf(){
+    let percentHealth = Math.round(wolfObj.stats.Health/wolfObj.stats.MaxHealth * 100)
+    let percentString = "width: " + percentHealth + "%"
+    healthBarWolf.style = percentString
+}
+
 
 //renders the character card, creature card as well as local storage to match changes
 function renderStats(){
@@ -211,12 +218,17 @@ function renderStats(){
     wolfStrength.textContent = wolfState.Strength
     wolfAgility.textContent = wolfState.Agility
 
+    if (wolfObj.stats.MaxHealth === null) {
+        wolfObj.stats.MaxHealth = wolfState.Health
+    }
+    
     charHealth.textContent = characterObj.stats.Health
     charStrength.textContent = characterObj.stats.Strength
     charAgility.textContent = characterObj.stats.Agility
 
     localStorage.setItem(CHARACTER_OBJ_KEY, JSON.stringify(characterObj));
     renderHealthBar()
+    renderHealthBarWolf()
 }
 
 

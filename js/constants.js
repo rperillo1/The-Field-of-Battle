@@ -14,7 +14,9 @@ let charAgility = document.querySelector('#char-agility')
 let positiveDisplayArea = document.querySelector('#h3_1')
 let negativeDisplayArea = document.querySelector('#h3_2')
 
-let healthBar = document.querySelector('.progress-bar')
+let healthBar = document.querySelector('.healthbar-char')
+let healthBarSnake = document.querySelector('.healthbar-snake')
+let healthBarWolf = document.querySelector('.healthbar-wolf')
 
 
 function renderCharacterCard(){
@@ -23,7 +25,6 @@ function renderCharacterCard(){
     charStrength.textContent = characterObj.stats.Strength
     charAgility.textContent = characterObj.stats.Agility
 }
-
 
 
 function renderHealthBar(){
