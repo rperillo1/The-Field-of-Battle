@@ -51,6 +51,10 @@ body {
     background-image: url(../imgs/home.jpg);
 }
 
+.alchemistBack {
+    background-image: url(../imgs/alchemist.jpg);
+}
+
 #icon-home {
     display: flex;
     justify-content: flex-end;
@@ -196,4 +200,17 @@ body {
 
 #loading {
     margin-top: 100px;
+}
+
+#potion-list {
+    margin-top: 50px;
+    margin-left: 80px;
+    text-align: left;
+    max-width: 500px;
+}
+
+
+.coin {
+    float: right;
+    color: rgb(197, 168, 5);
 }

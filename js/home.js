@@ -1,7 +1,6 @@
 /*----- cached element references -----*/
 let sleepBtn = document.querySelector('#sleep-button')
 let loading = document.querySelectorAll('#loading')
-// let charHealth = document.querySelector('#char-health')
 
 
 

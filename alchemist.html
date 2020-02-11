@@ -12,23 +12,23 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script defer src="js/constants.js"></script>
-    <script defer src="js/main_2.js"></script>
+    <script defer src="js/alchemist.js"></script>
 </head>
 <body>
-
-    <section class="gameContents gameBack2">
-        <div>
-            <div id="icon-set1">
-                <a id="home" href="home.html"><i class="fas fa-house-damage icons text-dark"></i>Home</a>
-                <a id="alchemist" href="alchemist.html"><i class="fas fa-wine-bottle icons text-dark"></i>Alchemist</a>
-                <a id="weaponsmith" href=""><i class="fas fa-gavel icons text-dark"></i>Weaponsmith</a>
-            </div>
-            <div id="icon-set2">
-                <a id="forest" href="index_3.html"><i class="fas fa-tree icons text-warning"></i>Forest</a>
-                <!-- <a id="mountains" href=""><i class="fas fa-mountain icons text-warning"></i>Mountains</a> -->
-            </div>
+  
+    <section class="gameContents alchemistBack">
+        <div id="icon-set1">
+            <a id="town2" href="index_2.html"><i class="fas fa-chess-rook icons text-warning"></i>Town</a>
         </div>
+        
+        <div class="list-group" id="potion-list">
+            <button type="button" class="list-group-item list-group-item-action">Minor Health Potion <span class="coin">200 COIN</span></button>
+            <button type="button" class="list-group-item list-group-item-action">Greater Health Potion <span class="coin">400 COIN</span></button>
+            <button type="button" class="list-group-item list-group-item-action">Potion of Hill Giant Strength <span class="coin">100 COIN</span></button>
+            <button type="button" class="list-group-item list-group-item-action">Potion of Feline Swiftness <span class="coin">100 COIN</span></button>
+          </div>
     </section>
+
 
     <aside class="charStats">
         <div class="card">
@@ -39,7 +39,7 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Health: &nbsp<div id="char-health"></div></li>
-              <li class="list-group-item">Strength: &nbsp<div id="char-strength"></div></li>
+              <li class="list-group-item">Strength: &nbsp<div id="char-strength"></div> </li>
               <li class="list-group-item">Agility: &nbsp<div id="char-agility"></div></li>
             </ul>
             <div class="card-body">
