@@ -214,7 +214,12 @@ function createBattleCards(e){
 }
 
 function potionMenu(){
-    potionCard.style.visibility = 'visible'
+    if (potionCard.style.visibility === 'hidden') {
+        potionCard.style.visibility = 'visible'
+    }
+    else if (potionCard.style.visibility === 'visible') {
+        potionCard.style.visibility = 'hidden'
+    }
 }
 
 function renderHealthBarSnake(){
