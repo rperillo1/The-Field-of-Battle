@@ -57,11 +57,13 @@ function isDead(){
         disableButtons()
     }
     else if (snakeObj.stats.Health < 0) {
-        alert("you beat the snake, move to the mountains")
+        positiveDisplayArea.innerHTML = 'You beat the snake! <br> Move to the mountains!'
+        negativeDisplayArea.textContent = ''
         disableButtons()
         mountainsBtn.style.visibility = 'visible'
     }
 }
+
 
 function disableButtons(){
     fightBtn.disabled = true;
@@ -70,12 +72,14 @@ function disableButtons(){
     runBtn.disabled = true;
 }
 
+
 function undisableButtons() {
     fightBtn.disabled = false;
     swingBtn.disabled = false;
     dodgeBtn.disabled = false;
     runBtn.disabled = false;
 }
+
 
 //generates the snakes stats
 function generateStats(){
@@ -112,6 +116,8 @@ function generateAgi(){
 function swing(){
     disableButtons()
     charSwing()
+    renderStats()
+    isDead()
     setTimeout(function(){
         positiveDisplayArea.textContent = ''
         negativeDisplayArea.textContent = ''
@@ -128,6 +134,7 @@ function swing(){
     }, 2400);
 }
 
+
 function charSwing(){
     let charSwingCheck = randomizeStrength(characterObj)
     let snakeMissCheck = randomizeAgility(snakeObj)
@@ -136,9 +143,10 @@ function charSwing(){
         positiveDisplayArea.innerHTML = `You hit the snake! <br> You rolled ${charSwingCheck} and the creature rolled ${snakeMissCheck}`
     }
     else {
-        negativeDisplayArea.innerHTML = `You miss! <br> You rolled ${charSwingCheck} and the creature rolled ${snakeMissCheck}`
+        positiveDisplayArea.innerHTML = `You miss! <br> You rolled ${charSwingCheck} and the creature rolled ${snakeMissCheck}`
     }
 }
+
 
 function creatureSwing(){
    let snakeSwingCheck = randomizeStrength(snakeObj)
@@ -148,7 +156,7 @@ function creatureSwing(){
        negativeDisplayArea.innerHTML = `Creature hit you! <br> It rolled ${snakeSwingCheck} and you rolled ${charMissCheck}`
    }
    else {
-       positiveDisplayArea.innerHTML = `Creature misses you! <br> It rolled ${snakeSwingCheck} and you rolled ${charMissCheck}`
+       negativeDisplayArea.innerHTML = `Creature misses you! <br> It rolled ${snakeSwingCheck} and you rolled ${charMissCheck}`
    }
 }
 
@@ -165,7 +173,13 @@ function dodge(){
     }
     else {
         negativeDisplayArea.innerHTML = 'You did not dodge the creatures swing. <br> Creature swings at you!'
-        creatureSwing()
+        disableButtons()
+        setTimeout(function(){
+            creatureSwing()
+            renderStats()
+            isDead()
+            undisableButtons()
+        },1701);
     }
     renderStats()
     isDead()
@@ -184,13 +198,17 @@ function run(){
         fightBtn.style.visibility = 'visible'
     }
     else {
-        negativeDisplayArea.innerHTML = `you did not run away, <br> snake rolled ${snakeCatchCheck} and character rolled ${charRunCheck}`
-        creatureSwing()
+        positiveDisplayArea.innerHTML = `you did not run away, <br> snake rolled ${snakeCatchCheck} and character rolled ${charRunCheck}`
+        disableButtons()
+        setTimeout(function(){
+            creatureSwing()
+            renderStats()
+            isDead()
+            undisableButtons()
+        },900);
     }
     snakeObj.stats.Agility -= 50;
     console.log(`snakeObj.stats.Agility is ${snakeObj.stats.Agility} after run attempt`)
-    renderStats()
-    isDead()
 }
 
 
@@ -213,6 +231,7 @@ function createBattleCards(e){
     },600);
 }
 
+
 function potionMenu(){
     if (potionCard.style.visibility === 'hidden') {
         potionCard.style.visibility = 'visible'
@@ -221,6 +240,7 @@ function potionMenu(){
         potionCard.style.visibility = 'hidden'
     }
 }
+
 
 function renderHealthBarSnake(){
     let percentHealth = Math.round(snakeObj.stats.Health/snakeObj.stats.MaxHealth * 100)

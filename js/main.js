@@ -23,11 +23,22 @@ const characterObj = {
     },
     inventory: {
         potions: {
-            healthPotion: 0,
-            greaterHealthPotion: 0,
-            potionOfHillGiantStrength: 0,
-            PotionofFelineSwiftness: 0
-        },
+            healthPotion: {
+                cost: 200,
+                owned: 0
+            },
+            greaterHealthPotion: {
+                cost: 400,
+                owned: 0
+            },
+            potionOfHillGiantStrength: {
+                cost: 100,
+                owned: 0
+            },
+            PotionofFelineSwiftness: {
+                cost: 100,
+                owned: 0
+            },
         weapons: [],
         coin: 5000
     }
