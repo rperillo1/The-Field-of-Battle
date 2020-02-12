@@ -19,9 +19,13 @@ function handlePurchase(e){
     let target = e.target.id;
     if (characterObj.inventory.coin >= characterObj.inventory.potions[target].cost) {
         characterObj.inventory.coin -= characterObj.inventory.potions[target].cost;
+        characterObj.inventory.potions[target].owned += 1
+        coinDisplay.innerHTML = characterObj.inventory.coin
     }
-    characterObj.inventory.potions[target].owned += 1
-    coinDisplay.innerHTML = characterObj.inventory.coin
+    else {
+        coinDisplay.style.backgroundColor = "red"
+    }
+    localStorage.setItem(CHARACTER_OBJ_KEY, JSON.stringify(characterObj));
 }
 
 function init(){

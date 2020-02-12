@@ -13,6 +13,7 @@ let potionAgiModifier = 0;
 /*----- cached element references -----*/
 let fightBtn = document.querySelector('#fight')
 let forestBtn = document.querySelector('#forest')
+let mountainsBtn = document.querySelector('#mountains')
 let creaturesCard = document.querySelector('.creatureStats2')
 let combatCard = document.querySelector('.combat-card')
 let potionCard = document.querySelector('.potion-card')
@@ -226,27 +227,56 @@ function run(){
 
 //potion functionality
 function minorHealthPotionFunc(){
-    characterObj.stats.Health += 50;
-    renderStats()
+    if (characterObj.inventory.potions.healthPotion.owned > 0) {
+        if (characterObj.stats.MaxHealth - characterObj.stats.Health >= 50) {
+            characterObj.stats.Health += 50;
+        }
+        else if (characterObj.stats.MaxHealth - characterObj.stats.Health < 50) {
+        characterObj.stats.Health += (characterObj.stats.MaxHealth - characterObj.stats.Health)
+        renderStats()
+        }
+    characterObj.inventory.potions.healthPotion.owned -= 1;
+    }
+    else {
+        positiveDisplayArea.textContent = "Sorry, you dont have any potions left of that kind"
+    }
 }
 
 function greaterHealthPotionFunc(){
-    characterObj.stats.Health = characterObj.stats.MaxHealth
-    renderStats()
+    if (characterObj.inventory.potions.greaterHealthPotion.owned > 0) {
+        characterObj.stats.Health = characterObj.stats.MaxHealth
+        renderStats()
+        characterObj.inventory.potions.greaterHealthPotion.owned -= 1;
+    }
+    else {
+        positiveDisplayArea.textContent = "Sorry, you dont have any potions left of that kind"
+    }
 }
 
 function strengthPotionFunc(){
-    potionStrModifier = 30;
-    characterObj.stats.Strength += potionStrModifier;
-    charStrength.style.color = 'green'
-    renderStats()
+    if (characterObj.inventory.potions.potionOfHillGiantStrength.owned > 0) {
+        potionStrModifier = 30;
+        characterObj.stats.Strength += potionStrModifier;
+        charStrength.style.color = 'green'
+        renderStats()
+        characterObj.inventory.potions.potionOfHillGiantStrength.owned -= 1;
+    }
+    else {
+        positiveDisplayArea.textContent = "Sorry, you dont have any potions left of that kind"
+    }
 }
 
 function agilityPotionFunc(){
-    potionAgiModifier = 30;
-    characterObj.stats.Agility += potionAgiModifier;
-    charAgility.style.color = 'green'
-    renderStats()
+    if (characterObj.inventory.potions.potionOfFelineSwiftness.owned > 0) {
+        potionAgiModifier = 30;
+        characterObj.stats.Agility += potionAgiModifier;
+        charAgility.style.color = 'green'
+        renderStats()
+        characterObj.inventory.potions.potionOfFelineSwiftness.owned -= 1
+    }
+    else {
+        positiveDisplayArea.textContent = "Sorry, you dont have any potions left of that kind"
+    }
 }
 
 function potionMenu(){
@@ -313,6 +343,7 @@ function init(){
     fightBtn.style.visibility = 'hidden'
     forestBtn.style.visibility = 'hidden'
     potionCard.style.visibility = 'hidden'
+    mountainsBtn.style.visibility = 'hidden'
     renderStats()
 }
 

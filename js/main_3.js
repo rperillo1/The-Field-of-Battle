@@ -235,27 +235,56 @@ function run(){
 
 //potion functionality
 function minorHealthPotionFunc(){
-    characterObj.stats.Health += 50;
-    renderStats()
+    if (characterObj.inventory.potions.healthPotion.owned > 0) {
+        if (characterObj.stats.MaxHealth - characterObj.stats.Health >= 50) {
+            characterObj.stats.Health += 50;
+        }
+        else if (characterObj.stats.MaxHealth - characterObj.stats.Health < 50) {
+        characterObj.stats.Health += (characterObj.stats.MaxHealth - characterObj.stats.Health)
+        renderStats()
+        }
+    characterObj.inventory.potions.healthPotion.owned -= 1;
+    }
+    else {
+        positiveDisplayArea.textContent = "Sorry, you dont have any potions left of that kind"
+    }
 }
 
 function greaterHealthPotionFunc(){
-    characterObj.stats.Health = characterObj.stats.MaxHealth
-    renderStats()
+    if (characterObj.inventory.potions.greaterHealthPotion.owned > 0) {
+        characterObj.stats.Health = characterObj.stats.MaxHealth
+        renderStats()
+        characterObj.inventory.potions.greaterHealthPotion.owned -= 1;
+    }
+    else {
+        positiveDisplayArea.textContent = "Sorry, you dont have any potions left of that kind"
+    }
 }
 
 function strengthPotionFunc(){
-    potionStrModifier = 30;
-    characterObj.stats.Strength += potionStrModifier;
-    charStrength.style.color = 'green'
-    renderStats()
+    if (characterObj.inventory.potions.potionOfHillGiantStrength.owned > 0) {
+        potionStrModifier = 30;
+        characterObj.stats.Strength += potionStrModifier;
+        charStrength.style.color = 'green'
+        renderStats()
+        characterObj.inventory.potions.potionOfHillGiantStrength.owned -= 1;
+    }
+    else {
+        positiveDisplayArea.textContent = "Sorry, you dont have any potions left of that kind"
+    }
 }
 
 function agilityPotionFunc(){
-    potionAgiModifier = 30;
-    characterObj.stats.Agility += potionAgiModifier;
-    charAgility.style.color = 'green'
-    renderStats()
+    if (characterObj.inventory.potions.potionOfFelineSwiftness.owned > 0) {
+        potionAgiModifier = 30;
+        characterObj.stats.Agility += potionAgiModifier;
+        charAgility.style.color = 'green'
+        renderStats()
+        characterObj.inventory.potions.potionOfFelineSwiftness.owned -= 1
+    }
+    else {
+        positiveDisplayArea.textContent = "Sorry, you dont have any potions left of that kind"
+    }
 }
 
 function potionMenu(){

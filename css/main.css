@@ -163,7 +163,7 @@ audio {
 .creatureStats2 {
     display: flex;
     justify-content: center;
-    padding-top: 130px;
+    padding-top: 30px;
     text-align: left;
 }
 

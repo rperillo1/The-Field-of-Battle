@@ -40,7 +40,7 @@ const characterObj = {
             }
         },
         weapons: [],
-        coin: 5000
+        coin: 200
     }
 }
 
