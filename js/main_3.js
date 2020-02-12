@@ -79,7 +79,7 @@ function isDead(){
         characterObj.inventory.coin += snakeObj.loot.coin
     }
     else if (characterObj.stats.Health < 0) {
-        alert("game over, you died")
+        alert("Game Over, you have died! Try again")
         window.location.assign("index.html")
         disableButtons()
     }

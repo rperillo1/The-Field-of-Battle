@@ -77,6 +77,7 @@ function isDead(){
         window.location.assign("gameOver.html")
     }
     else if (characterObj.stats.Health < 0) {
+        alert("Game Over, you have died! Try again")
         window.location.assign("index.html")
         disableButtons()
     }
