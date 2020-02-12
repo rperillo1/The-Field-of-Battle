@@ -7,6 +7,7 @@ let buyAgilityPotion = document.querySelector('#potionOfFelineSwiftness')
 let coinDisplay = document.querySelector('#coin-total')
 coinDisplay.innerHTML = characterObj.inventory.coin
 
+
 /*----- event listeners -----*/
 buyMinorHealthPotion.addEventListener("click", handlePurchase)
 buyGreaterHealthPotion.addEventListener("click", handlePurchase)
