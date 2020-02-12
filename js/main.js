@@ -22,9 +22,16 @@ const characterObj = {
         MaxHealth: characterState.Health,
     },
     inventory: {
-        potions: [],
-        weapons: []
+        potions: {
+            healthPotion: 0,
+            greaterHealthPotion: 0,
+            potionOfHillGiantStrength: 0,
+            PotionofFelineSwiftness: 0
+        },
+        weapons: [],
+        coin: 5000
     }
+
 }
 
 

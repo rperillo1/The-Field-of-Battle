@@ -245,3 +245,13 @@ button.btn.btn-light {
     padding: 0;
     width: 100%;
 }
+
+#coin-display {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    max-width: 300px;
+    margin-left: 170px;
+    height: 80px;
+    align-items: center;
+}
