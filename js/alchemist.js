@@ -30,6 +30,7 @@ function handlePurchase(e){
 
 function init(){
     coinDisplay.innerHTML = characterObj.inventory.coin
+    localStorage.getItem(CHARACTER_OBJ_KEY, JSON.stringify(characterObj))
 }
 
 init()

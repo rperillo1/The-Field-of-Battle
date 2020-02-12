@@ -68,17 +68,19 @@ agilityPotion.addEventListener('click', agilityPotionFunc)
 
 //check if player or creature is dead
 function isDead(){
-    if (characterObj.stats.Health < 0) {
-        alert("game over, you died")
-        disableButtons()
-    }
-    else if (snakeObj.stats.Health < 0) {
+    if (snakeObj.stats.Health < 0) {
         positiveDisplayArea.innerHTML = 'You beat the snake! <br> Move to the mountains!'
         negativeDisplayArea.textContent = `You looted ${snakeObj.loot.coin} coins from its corpse!`
         disableButtons()
         mountainsBtn.style.visibility = 'visible'
         potionCard.style.visibility = 'hidden'
+        fightBtn.style.visibility = 'visible'
+        townBtn.style.visibility = 'visible'
         characterObj.inventory.coin += snakeObj.loot.coin
+    }
+    else if (characterObj.stats.Health < 0) {
+        alert("game over, you died")
+        disableButtons()
     }
 }
 

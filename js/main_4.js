@@ -69,15 +69,15 @@ agilityPotion.addEventListener('click', agilityPotionFunc)
 
 //check if player or creature is dead
 function isDead(){
-    if (characterObj.stats.Health < 0) {
-        alert("game over, you died")
-        disableButtons()
-    }
-    else if (wolfObj.stats.Health < 0) {
+    if (wolfObj.stats.Health < 0) {
         positiveDisplayArea.innerHTML = 'You beat the wolf! <br> You win the game!'
         negativeDisplayArea.textContent = `You looted ${wolfObj.loot.coin} coins from its corpse!`
         disableButtons()
         characterObj.inventory.coin += wolfObj.loot.coin
+    }
+    else if (characterObj.stats.Health < 0) {
+        alert("game over, you died")
+        disableButtons()
     }
 }
 
@@ -364,6 +364,7 @@ function init(){
     mountainsBtn.style.visibility = 'hidden'
     renderStats()
     randomizeWolfCoinLoot()
+    wolfObj.loot.coin = wolfState.Coin
 }
 
 init()
