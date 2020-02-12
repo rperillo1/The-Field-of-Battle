@@ -1,3 +1,7 @@
+//constants
+const wolfSound = new Audio('audio/SFX/growl_1.mp3');
+const swordSound_2 = new Audio('audio/SFX/Sword_2.mp3')
+
 /*----- app's state (variables) -----*/
 const wolfState = {
     Health: 0,
@@ -73,6 +77,7 @@ function isDead(){
         positiveDisplayArea.innerHTML = 'You beat the wolf! <br> You win the game!'
         negativeDisplayArea.textContent = `You looted ${wolfObj.loot.coin} coins from its corpse!`
         disableButtons()
+        characterObj.inventory.coin += wolfObj.loot.coin
     }
 }
 
@@ -159,6 +164,7 @@ function charSwing(){
     let charSwingCheck = randomizeStrength(characterObj)
     let wolfMissCheck = randomizeAgility(wolfObj)
     if (charSwingCheck > wolfMissCheck) {
+        swordSound_2.play()
         wolfState.Health -= 10;
         positiveDisplayArea.innerHTML = `You hit the wolf! <br> You rolled ${charSwingCheck} and the creature rolled ${wolfMissCheck}`
     }
@@ -172,6 +178,7 @@ function creatureSwing(){
    let wolfSwingCheck = randomizeStrength(wolfObj)
    let charMissCheck = randomizeAgility(characterObj)
    if (wolfSwingCheck > charMissCheck) {
+       wolfSound.play()
        characterObj.stats.Health -= 10;
        negativeDisplayArea.innerHTML = `Creature hits you! <br> It rolled ${wolfSwingCheck} and you rolled ${charMissCheck}`
    }

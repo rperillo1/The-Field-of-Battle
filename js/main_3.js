@@ -1,5 +1,6 @@
 /*----- constants -----*/
-// const beepAudio = new Audio('http://soundbible.com/mp3/Robot_blip-Marianne_Gagnon-120342607.mp3');
+const snakeSound = new Audio('audio/SFX/snake_1.mp3');
+const swordSound_1 = new Audio('audio/SFX/Sword_1.mp3')
 
 
 /*----- app's state (variables) -----*/
@@ -167,6 +168,7 @@ function charSwing(){
     let charSwingCheck = randomizeStrength(characterObj)
     let snakeMissCheck = randomizeAgility(snakeObj)
     if (charSwingCheck > snakeMissCheck) {
+        swordSound_1.play()
         snakeState.Health -= 10;
         positiveDisplayArea.innerHTML = `You hit the snake! <br> You rolled ${charSwingCheck} and the creature rolled ${snakeMissCheck}`
     }
@@ -180,6 +182,7 @@ function creatureSwing(){
    let snakeSwingCheck = randomizeStrength(snakeObj)
    let charMissCheck = randomizeAgility(characterObj)
    if (snakeSwingCheck > charMissCheck) {
+       snakeSound.play()
        characterObj.stats.Health -= 10;
        negativeDisplayArea.innerHTML = `Creature hit you! <br> It rolled ${snakeSwingCheck} and you rolled ${charMissCheck}`
    }
