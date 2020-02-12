@@ -127,7 +127,7 @@ body {
 .charStats {
     grid-area: charStats;
     background-color: lightgray;
-    border: 7px solid lightgray;
+    border: 5px solid lightgray;
 }
 
 .card-img-top {
@@ -138,6 +138,15 @@ body {
 .card-body {
     background-color: lightgrey;
     height: 100%;
+}
+
+div.card-body {
+    padding: 8px; 
+}
+
+audio {
+    padding: 8px;
+    outline: none;
 }
 
 .snake-img, .wolf-img {

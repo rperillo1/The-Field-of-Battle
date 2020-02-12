@@ -18,6 +18,21 @@ let healthBar = document.querySelector('.healthbar-char')
 let healthBarSnake = document.querySelector('.healthbar-snake')
 let healthBarWolf = document.querySelector('.healthbar-wolf')
 
+let body = document.querySelector('body')
+let audioPlayer = document.querySelector('audio')
+
+
+//event listeners
+body.addEventListener("click", playAudio)
+
+
+//Functions 
+
+//audio player
+function playAudio(){
+    audioPlayer.play()
+} 
+
 
 function renderCharacterCard(){
     charNameArea.textContent = charName

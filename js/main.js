@@ -1,5 +1,4 @@
 /*----- constants -----*/
-// const beepAudio = new Audio('http://soundbible.com/mp3/Robot_blip-Marianne_Gagnon-120342607.mp3');
 const CHARACTER_OBJ_KEY = 'characterObj';
 
 
@@ -38,11 +37,11 @@ const characterObj = {
             PotionofFelineSwiftness: {
                 cost: 100,
                 owned: 0
-            },
+            }
+        },
         weapons: [],
         coin: 5000
     }
-
 }
 
 
@@ -55,12 +54,17 @@ let charHealth = document.querySelector('#char-health')
 let charStrength = document.querySelector('#char-strength')
 let charAgility = document.querySelector('#char-agility')
 
+//for audio selector
+let body = document.querySelector('body')
+let audioPlayer = document.querySelector('audio')
+
 //navigations buttons
 let adventureButton = document.querySelector('#adventure')
 
 
 /*----- event listeners -----*/
 charSubmit.addEventListener('click', CreateChar)
+body.addEventListener("click", playAudio)
 
 
 
@@ -126,6 +130,10 @@ function addModifier(){
     }
 }
 
+function playAudio(){
+    audioPlayer.play()
+} 
+
 function renderStats(){
     generateStats()
     addModifier()
@@ -141,7 +149,6 @@ function renderStats(){
 
 function init(){
     adventureButton.style.visibility = 'hidden'
-    renderHealthBar()
 }
 
 init()

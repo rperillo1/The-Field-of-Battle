@@ -13,7 +13,7 @@
      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script defer src="js/main.js"></script>
 </head>
-<body>
+<body onload="playAudio()">
   
     <section class="gameContents gameBack1">
         <div id="icon-home"><h1>The Field of Battle</h1>
@@ -55,6 +55,10 @@
               <a href="#" class="card-link">Inventory</a>
             </div>
           </div>
+          <!-- <iframe src='/Users/rperillo/code/projects/The-Field-of-Battle/audio/GF_TreantGrove.mp3' allow="autoplay"></iframe> -->
+          <audio controls autoplay volume="0.1">
+            <source src='/Users/rperillo/code/projects/The-Field-of-Battle/audio/GF_TreantGrove.mp3' type="audio/ogg">
+          </audio>
     </aside>
 
 </body>
