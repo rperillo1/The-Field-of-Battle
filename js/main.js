@@ -34,7 +34,7 @@ const characterObj = {
                 cost: 100,
                 owned: 0
             },
-            PotionofFelineSwiftness: {
+            potionOfFelineSwiftness: {
                 cost: 100,
                 owned: 0
             }

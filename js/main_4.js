@@ -6,12 +6,16 @@ const wolfState = {
 }
 
 let strModifier = 0;
+let potionStrModifier = 0;
+let potionAgiModifier = 0;
+
 
 /*----- cached element references -----*/
 let fightBtn = document.querySelector('#fight')
 let forestBtn = document.querySelector('#forest')
 let creaturesCard = document.querySelector('.creatureStats2')
 let combatCard = document.querySelector('.combat-card')
+let potionCard = document.querySelector('.potion-card')
 let wolfHealth = document.querySelector('#creature-health')
 let wolfStrength = document.querySelector('#creature-strength')
 let wolfAgility = document.querySelector('#creature-agility')
@@ -21,6 +25,12 @@ let swingBtn = document.querySelector("#swing")
 let dodgeBtn = document.querySelector('#dodge')
 let runBtn = document.querySelector('#run')
 let potionsBtn = document.querySelector('#potions')
+
+//potions
+let minorHealthPotion = document.querySelector('#health-potion')
+let greaterHealthPotion = document.querySelector('#greater-health-potion')
+let strengthPotion = document.querySelector('#strength-potion')
+let agilityPotion = document.querySelector('#agility-potion')
 
 
 const wolfObj = {
@@ -37,6 +47,12 @@ fightBtn.addEventListener('click', createBattleCards)
 swingBtn.addEventListener('click', swing)
 dodgeBtn.addEventListener('click', dodge)
 runBtn.addEventListener('click', run)
+potionsBtn.addEventListener('click', potionMenu)
+
+minorHealthPotion.addEventListener('click', minorHealthPotionFunc)
+greaterHealthPotion.addEventListener('click', greaterHealthPotionFunc)
+strengthPotion.addEventListener('click', strengthPotionFunc)
+agilityPotion.addEventListener('click', agilityPotionFunc)
 
 
 
@@ -114,11 +130,17 @@ function swing(){
         renderStats()
         isDead()
     },1701);
-    characterObj.stats.Strength -= strModifier;
+    characterObj.stats.Strength -= potionStrModifier;
+    characterObj.stats.Strength -= potionAgiModifier;
+    characterObj.stats.Agility -= strModifier;
     strModifier = 0;
+    potionStrModifier = 0;
+    potionAgiModifier = 0;
+    charStrength.style.color = 'black'
     setTimeout(function(){
         undisableButtons()
     }, 2400);
+    
 }
 
 
@@ -167,12 +189,16 @@ function dodge(){
             undisableButtons()
         },1701);
     }
+    renderStats()
+    isDead()
+    characterObj.stats.Agility -= potionAgiModifier;
+    potionAgiModifier = 0;
+    charAgility.style.color = 'black'
 }
 
 
 function run(){
     wolfObj.stats.Agility += 50;
-    console.log(`wolfObj.stats.Agility is ${wolfObj.stats.Agility} before run attempt`)
     let charRunCheck = randomizeAgility(characterObj)
     let wolfCatchCheck = randomizeAgility(wolfObj)
     if (charRunCheck > wolfCatchCheck) {
@@ -191,8 +217,45 @@ function run(){
             undisableButtons()
         },900);
     }
+    characterObj.stats.Agility -= potionAgiModifier;
     wolfObj.stats.Agility -= 50;
-    console.log(`wolfObj.stats.Agility is ${wolfObj.stats.Agility} after run attempt`)
+    potionAgiModifier = 0;
+    charAgility.style.color = 'black'
+}
+
+
+//potion functionality
+function minorHealthPotionFunc(){
+    characterObj.stats.Health += 50;
+    renderStats()
+}
+
+function greaterHealthPotionFunc(){
+    characterObj.stats.Health = characterObj.stats.MaxHealth
+    renderStats()
+}
+
+function strengthPotionFunc(){
+    potionStrModifier = 30;
+    characterObj.stats.Strength += potionStrModifier;
+    charStrength.style.color = 'green'
+    renderStats()
+}
+
+function agilityPotionFunc(){
+    potionAgiModifier = 30;
+    characterObj.stats.Agility += potionAgiModifier;
+    charAgility.style.color = 'green'
+    renderStats()
+}
+
+function potionMenu(){
+    if (potionCard.style.visibility === 'hidden') {
+        potionCard.style.visibility = 'visible'
+    }
+    else if (potionCard.style.visibility === 'visible') {
+        potionCard.style.visibility = 'hidden'
+    }
 }
 
 
@@ -249,6 +312,7 @@ function renderStats(){
 function init(){
     fightBtn.style.visibility = 'hidden'
     forestBtn.style.visibility = 'hidden'
+    potionCard.style.visibility = 'hidden'
     renderStats()
 }
 

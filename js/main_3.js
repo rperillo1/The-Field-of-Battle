@@ -10,6 +10,8 @@ const snakeState = {
 }
 
 let strModifier = 0;
+let potionStrModifier = 0;
+let potionAgiModifier = 0;
 
 /*----- cached element references -----*/
 let fightBtn = document.querySelector('#fight')
@@ -29,6 +31,12 @@ let dodgeBtn = document.querySelector('#dodge')
 let runBtn = document.querySelector('#run')
 let potionsBtn = document.querySelector('#potions')
 
+//potions
+let minorHealthPotion = document.querySelector('#health-potion')
+let greaterHealthPotion = document.querySelector('#greater-health-potion')
+let strengthPotion = document.querySelector('#strength-potion')
+let agilityPotion = document.querySelector('#agility-potion')
+
 
 const snakeObj = {
     stats: {
@@ -46,7 +54,10 @@ dodgeBtn.addEventListener('click', dodge)
 runBtn.addEventListener('click', run)
 potionsBtn.addEventListener('click', potionMenu)
 
-
+minorHealthPotion.addEventListener('click', minorHealthPotionFunc)
+greaterHealthPotion.addEventListener('click', greaterHealthPotionFunc)
+strengthPotion.addEventListener('click', strengthPotionFunc)
+agilityPotion.addEventListener('click', agilityPotionFunc)
 
 /*----- functions -----*/
 
@@ -61,6 +72,7 @@ function isDead(){
         negativeDisplayArea.textContent = ''
         disableButtons()
         mountainsBtn.style.visibility = 'visible'
+        potionCard.style.visibility = 'hidden'
     }
 }
 
@@ -128,7 +140,12 @@ function swing(){
         isDead()
     },1701);
     characterObj.stats.Strength -= strModifier;
+    characterObj.stats.Strength -= potionStrModifier;
+    characterObj.stats.Agility -= potionAgiModifier;
     strModifier = 0;
+    potionStrModifier = 0;
+    potionAgiModifier = 0;
+    charStrength.style.color = 'black'
     setTimeout(function(){
         undisableButtons()
     }, 2400);
@@ -183,12 +200,14 @@ function dodge(){
     }
     renderStats()
     isDead()
+    characterObj.stats.Agility -= potionAgiModifier;
+    potionAgiModifier = 0;
+    charAgility.style.color = 'black'
 }
 
 
 function run(){
     snakeObj.stats.Agility += 50;
-    console.log(`snakeObj.stats.Agility is ${snakeObj.stats.Agility} before run attempt`)
     let charRunCheck = randomizeAgility(characterObj)
     let snakeCatchCheck = randomizeAgility(snakeObj)
     if (charRunCheck > snakeCatchCheck) {
@@ -207,8 +226,45 @@ function run(){
             undisableButtons()
         },900);
     }
+    characterObj.stats.Agility -= potionAgiModifier;
     snakeObj.stats.Agility -= 50;
-    console.log(`snakeObj.stats.Agility is ${snakeObj.stats.Agility} after run attempt`)
+    potionAgiModifier = 0;
+    charAgility.style.color = 'black'
+}
+
+
+//potion functionality
+function minorHealthPotionFunc(){
+    characterObj.stats.Health += 50;
+    renderStats()
+}
+
+function greaterHealthPotionFunc(){
+    characterObj.stats.Health = characterObj.stats.MaxHealth
+    renderStats()
+}
+
+function strengthPotionFunc(){
+    potionStrModifier = 30;
+    characterObj.stats.Strength += potionStrModifier;
+    charStrength.style.color = 'green'
+    renderStats()
+}
+
+function agilityPotionFunc(){
+    potionAgiModifier = 30;
+    characterObj.stats.Agility += potionAgiModifier;
+    charAgility.style.color = 'green'
+    renderStats()
+}
+
+function potionMenu(){
+    if (potionCard.style.visibility === 'hidden') {
+        potionCard.style.visibility = 'visible'
+    }
+    else if (potionCard.style.visibility === 'visible') {
+        potionCard.style.visibility = 'hidden'
+    }
 }
 
 
@@ -229,16 +285,6 @@ function createBattleCards(e){
     setTimeout(function(){
         $('aside#creature-stats.creatureStats').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
     },600);
-}
-
-
-function potionMenu(){
-    if (potionCard.style.visibility === 'hidden') {
-        potionCard.style.visibility = 'visible'
-    }
-    else if (potionCard.style.visibility === 'visible') {
-        potionCard.style.visibility = 'hidden'
-    }
 }
 
 

@@ -5,8 +5,7 @@ let buyStrengthPotion = document.querySelector('#potionOfHillGiantStrength')
 let buyAgilityPotion = document.querySelector('#potionOfFelineSwiftness')
 
 let coinDisplay = document.querySelector('#coin-total')
-coinDisplay.innerHTML = characterObj.inventory.coin
-
+let coinCost = document.querySelector('.coin')
 
 /*----- event listeners -----*/
 buyMinorHealthPotion.addEventListener("click", handlePurchase)
@@ -17,11 +16,16 @@ buyAgilityPotion.addEventListener("click", handlePurchase)
 
 /*----- functions -----*/
 function handlePurchase(e){
-    console.log(e.target.id)
-    // if (characterObj.inventory.coin >= characterObj.inventory.potions.) {
-    //     characterObj.inventory.coin -= 200;
-    // }
-    // characterObj.inventory.potions.healthPotion += 1
-    // console.log(characterObj.inventory.coin)
-    // console.log(characterObj.inventory.potions.healthPotion)
+    let target = e.target.id;
+    if (characterObj.inventory.coin >= characterObj.inventory.potions[target].cost) {
+        characterObj.inventory.coin -= characterObj.inventory.potions[target].cost;
+    }
+    characterObj.inventory.potions[target].owned += 1
+    coinDisplay.innerHTML = characterObj.inventory.coin
 }
+
+function init(){
+    coinDisplay.innerHTML = characterObj.inventory.coin
+}
+
+init()
