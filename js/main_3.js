@@ -80,6 +80,7 @@ function isDead(){
     }
     else if (characterObj.stats.Health < 0) {
         alert("game over, you died")
+        window.location.assign("index.html")
         disableButtons()
     }
 }

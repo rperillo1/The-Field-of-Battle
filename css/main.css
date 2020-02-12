@@ -267,3 +267,29 @@ button.btn.btn-light {
     border-radius: 25px;
     border: 5px solid grey;
 }
+
+
+#main-logo h1 {
+        color: white;
+        font-size: 50px;
+        display: flex;
+        padding-right: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-shadow: 3px 4px #CB444B;
+}
+
+#main-display {
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin-left: 30px;
+    margin-top: 100px;
+    border: 10px solid #CB444B;
+    border-radius: 25px;
+}
+

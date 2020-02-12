@@ -74,9 +74,10 @@ function isDead(){
         negativeDisplayArea.textContent = `You looted ${wolfObj.loot.coin} coins from its corpse!`
         disableButtons()
         characterObj.inventory.coin += wolfObj.loot.coin
+        window.location.assign("gameOver.html")
     }
     else if (characterObj.stats.Health < 0) {
-        alert("game over, you died")
+        window.location.assign("index.html")
         disableButtons()
     }
 }
