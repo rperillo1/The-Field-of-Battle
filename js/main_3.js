@@ -7,6 +7,7 @@ const snakeState = {
     Health: 0,
     Strength: 0,
     Agility: 0,
+    Coin: 0
 }
 
 let strModifier = 0;
@@ -44,6 +45,9 @@ const snakeObj = {
         Strength: snakeState.Strength,
         Agility: snakeState.Agility,
         MaxHealth: null
+    },
+    loot: {
+        coin: snakeState.Coin
     }
 }
 
@@ -69,10 +73,11 @@ function isDead(){
     }
     else if (snakeObj.stats.Health < 0) {
         positiveDisplayArea.innerHTML = 'You beat the snake! <br> Move to the mountains!'
-        negativeDisplayArea.textContent = ''
+        negativeDisplayArea.textContent = `You looted ${snakeObj.loot.coin} coins from its corpse!`
         disableButtons()
         mountainsBtn.style.visibility = 'visible'
         potionCard.style.visibility = 'hidden'
+        characterObj.inventory.coin += snakeObj.loot.coin
     }
 }
 
@@ -122,6 +127,12 @@ function generateAgi(){
     snakeState.Agility = Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+
+function randomizeSnakeCoinLoot(){
+    let min = 25, max = 100
+    let randCoin = Math.floor(Math.random() * (max - min + 1) + min)
+    snakeState.Coin = randCoin;
+}
 
 
 //combat buttons functionality
@@ -238,10 +249,11 @@ function minorHealthPotionFunc(){
     if (characterObj.inventory.potions.healthPotion.owned > 0) {
         if (characterObj.stats.MaxHealth - characterObj.stats.Health >= 50) {
             characterObj.stats.Health += 50;
+            renderStats()
         }
         else if (characterObj.stats.MaxHealth - characterObj.stats.Health < 50) {
-        characterObj.stats.Health += (characterObj.stats.MaxHealth - characterObj.stats.Health)
-        renderStats()
+            characterObj.stats.Health += (characterObj.stats.MaxHealth - characterObj.stats.Health)
+            renderStats()
         }
     characterObj.inventory.potions.healthPotion.owned -= 1;
     }
@@ -354,6 +366,8 @@ function init(){
     townBtn.style.visibility = 'hidden'
     potionCard.style.visibility = 'hidden'
     renderStats()
+    randomizeSnakeCoinLoot()
+    snakeObj.loot.coin = snakeState.Coin
 }
 
 init()
