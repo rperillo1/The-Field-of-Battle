@@ -261,8 +261,9 @@ button.btn.btn-light {
     background-color: white;
     max-width: 300px;
     margin-left: 170px;
+    margin-top: 55px;
     height: 80px;
     align-items: center;
     border-radius: 25px;
-    border: 2px solid grey;
+    border: 5px solid grey;
 }
