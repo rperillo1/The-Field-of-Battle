@@ -118,12 +118,12 @@ function generateHealth(){
 }
 
 function generateStr(){
-    let min = 25, max = 40
+    let min = 25, max = 50
     wolfState.Strength = Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 function generateAgi(){
-    let min = 25, max = 40
+    let min = 25, max = 50
     wolfState.Agility = Math.floor(Math.random() * (max - min + 1) + min)
 }
 

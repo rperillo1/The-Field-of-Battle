@@ -117,7 +117,7 @@ function generateStats(){
 
 
 function generateHealth(){
-    let min = 40, max = 90
+    let min = 40, max = 85
     snakeState.Health = Math.floor(Math.random() * (max - min + 1) + min)
 }
 
